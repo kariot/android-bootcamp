@@ -15,6 +15,7 @@
         android:hint="Username"
         />
     <EditText
+        android:inputType="textPassword"
         android:layout_marginTop="15dp"
         android:layout_below="@id/edtUsername"
         android:id="@+id/edtPassword"
@@ -22,13 +23,21 @@
         android:layout_height="wrap_content"
         android:hint="Password"/>
 
-    <Button
+   <!-- <Button
+        android:onClick="onClickButton"
         android:layout_marginTop="25dp"
         android:id="@+id/button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/edtPassword"
-        android:text="Login" />
+        android:text="Login" />-->
+     <Button
+       android:layout_marginTop="25dp"
+       android:id="@+id/button"
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:layout_below="@+id/edtPassword"
+       android:text="Login" />
 
 
 </RelativeLayout>
