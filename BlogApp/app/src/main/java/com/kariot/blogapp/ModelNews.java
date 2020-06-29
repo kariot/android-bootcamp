@@ -1,7 +1,7 @@
 package com.kariot.blogapp;
 
 public class ModelNews {
-    String newsTitle,newsDesc,newsImg,newsURL;
+    private String newsTitle,newsDesc,newsImg,newsURL;
 
     public String getNewsTitle() {
         return newsTitle;

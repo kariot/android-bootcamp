@@ -1,6 +1,7 @@
 package com.kariot.blogapp;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 
 import org.w3c.dom.Text;
 
@@ -34,9 +37,19 @@ public class AdapterNews extends RecyclerView.Adapter<AdapterNews.NewsVH> {
 
     @Override
     public void onBindViewHolder(@NonNull NewsVH holder, int position) {
-        ModelNews dataItem = data.get(position);
-        holder.txtTitle.setText(dataItem.newsTitle);
-        holder.txtDesc.setText(dataItem.newsDesc);
+        final ModelNews dataItem = data.get(position);
+        holder.txtTitle.setText(dataItem.getNewsTitle());
+        holder.txtDesc.setText(dataItem.getNewsDesc());
+        Glide.with(context).load(dataItem.getNewsImg()).into(holder.imgNews);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent newIntent = new Intent(context,NewsDetailsActivity.class);
+                newIntent.putExtra("URL",dataItem.getNewsURL());
+                context.startActivity(newIntent);
+            }
+        });
+
     }
 
     @Override

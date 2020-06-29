@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
@@ -22,7 +23,7 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
-    String API_KEY = "YOUR-NEWS-API-KEY"; // Sign up to https://newsapi.org/ to get API KEY and paste it here
+    String API_KEY = "b066a94f47384f3e818eb99b5c2ef032"; // Sign up to https://newsapi.org/ to get API KEY and paste it here
     String API_URL = "https://newsapi.org/v2/top-headlines?country=in&apiKey=" + API_KEY;
 
     RecyclerView newsRecycler;
@@ -35,14 +36,21 @@ public class MainActivity extends AppCompatActivity {
         newsRecycler = findViewById(R.id.recyclerNews);
 
 
+        final ProgressDialog loader = new ProgressDialog(this);
+        loader.setMessage("Loading data...");
+        loader.setCancelable(false);
+        loader.show();
+
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, API_URL, null, new Response.Listener<JSONObject>() {
             @Override
             public void onResponse(JSONObject response) {
+                loader.dismiss();
                 handleResponse(response);
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                loader.dismiss();
                 Toast.makeText(MainActivity.this, error.toString(), Toast.LENGTH_SHORT).show();
                 Log.e("ERROR", error.toString());
             }
